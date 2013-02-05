@@ -7,5 +7,5 @@
 	
 	#define CONFIG_PATH "updaterconfig"
 	#define TMP_FILE "latestversion.tmp"
-	#define LOOK_FOR_BETA 1
+	#define CHECK_FOR_BETA 1
 #endif

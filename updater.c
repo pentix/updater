@@ -99,10 +99,11 @@ int main(void){
 		return 1;
 	
 	// Make sure the cache is written to the disk!
+	// Note: fflush() did not work here!?!
 	freopen(TMP_FILE, "r", versionfile);
 	
 	// Now read the file
-	fscanf(versionfile, "%64s", latestversion);
+	fscanf(versionfile, "%64[^\n]", latestversion);
 	
 	if(strlen(latestversion) == 0){
 		fprintf(stderr, "Corrupt updater version file!\n");
@@ -117,9 +118,19 @@ int main(void){
 	// Compare versions
 	if(strcmp(localversion, latestversion) == 0)
 		printf("No update available.");
-	else
-		printf("Update available\n");
-	
+	else{
+		printf("An update is available!\n");
+		
+		if(CHECK_FOR_BETA && strlen(latestversion) > 3){
+			if(latestversion[strlen(latestversion)-4] == 'b' && 
+			   latestversion[strlen(latestversion)-3] == 'e' && 
+			   latestversion[strlen(latestversion)-2] == 't' && 
+			   latestversion[strlen(latestversion)-1] == 'a')
+			{
+				printf("Note: Latest version is a beta version. Update on your own risk!\n");
+			}
+		}
+	}
 	
 	fclose(versionfile);
 	remove(TMP_FILE);
