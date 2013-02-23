@@ -3,7 +3,7 @@
 	
 	#define UPDATER_BOX "========================================"
 	#define UPDATER_VERSION "0.1"
-	#define UPDATER_WEB "github.com/flightgearuser/updater"
+	#define UPDATER_WEB "http://github.com/pentix/updater"
 	
 	#define CONFIG_PATH "updaterconfig"
 	#define TMP_FILE "latestversion.tmp"
